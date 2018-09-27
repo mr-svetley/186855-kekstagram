@@ -1,13 +1,14 @@
 'use strict';
 
 window.app.tagValidation = (function () {
-  var hashTagInput = document.querySelector('.text__hashtags');
   var MAX_TAG_LENGHT = 20;
   var ERROR_TOO_MUCH = 'Не больше пяти хэш-тегов';
   var ERROR_TOO_LONG = 'Хэш-тег не может быть длиннее 20 символов';
   var ERROR_TAG_REPEAT = 'Хэш-теги не должны повторяться (#tAg = #tag)';
   var ERROR_NO_TAG = 'Хэш-тег должен начинаться с # и не содержать других #';
   var ERROR_NO_NAME_TAG = 'После # должно быть имя тега';
+
+  var hashTagInput = document.querySelector('.text__hashtags');
 
   function onHashTagInputChange(evt) {
     validateHashTagInput(evt.target);

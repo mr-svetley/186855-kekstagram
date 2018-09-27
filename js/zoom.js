@@ -1,16 +1,16 @@
 'use strict';
 
 window.app.zoom = (function () {
+  var ZOOM_MIN = 25;
+  var ZOOM_MAX = 100;
+  var ZOOM_STEP = 25;
+  var ZOOM_DEFAULT = 100;
+
   var photoEditor = document.querySelector('.img-upload__overlay');
   var zoomMin = photoEditor.querySelector('.scale__control--smaller');
   var zoomPlus = photoEditor.querySelector('.scale__control--bigger');
   var zoomInput = photoEditor.querySelector('.scale__control--value');
   var editorImage = photoEditor.querySelector('.img-upload__preview');
-
-  var ZOOM_MIN = 25;
-  var ZOOM_MAX = 100;
-  var ZOOM_STEP = 25;
-  var ZOOM_DEFAULT = 100;
 
   function zoomPhoto(step) {
     var currentZoomValue = parseInt(zoomInput.value, 10);

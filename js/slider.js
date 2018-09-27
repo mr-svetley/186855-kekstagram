@@ -1,16 +1,16 @@
 'use strict';
 
 window.app.slider = (function () {
+  var VALUE_MIN = 0;
+  var VALUE_MAX = 100;
+  var VALUE_DEFAULT = 100;
+
   var photoEditor = document.querySelector('.img-upload__overlay');
   var slider = photoEditor.querySelector('.img-upload__effect-level');
   var sliderPin = slider.querySelector('.effect-level__pin');
   var sliderInput = slider.querySelector('.effect-level__value');
   var slederScale = slider.querySelector('.effect-level__line');
   var sliderDepth = slider.querySelector('.effect-level__depth');
-
-  var VALUE_MIN = 0;
-  var VALUE_MAX = 100;
-  var VALUE_DEFAULT = 100;
 
   var currentCb;
 

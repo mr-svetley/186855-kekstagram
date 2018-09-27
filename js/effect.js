@@ -1,14 +1,14 @@
 'use strict';
 
 window.app.effect = (function () {
-  var photoEditor = document.querySelector('.img-upload__overlay');
-  var editorImage = photoEditor.querySelector('.img-upload__preview img');
-  var effectInputContainer = photoEditor.querySelector('.img-upload__effects');
-
   var MAX_BLUR_VALUE = 3;
   var MAX_BRIGHTNESS_VALUE = 3;
   var DEFAULT_EFFECT_VALUE = 100;
   var DEFAULT_EFFECT_NAME = 'none';
+
+  var photoEditor = document.querySelector('.img-upload__overlay');
+  var editorImage = photoEditor.querySelector('.img-upload__preview img');
+  var effectInputContainer = photoEditor.querySelector('.img-upload__effects');
 
   var currentEffectName;
 
