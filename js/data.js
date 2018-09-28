@@ -1,30 +1,12 @@
 'use strict';
 
-window.thumb = (function () {
-  var utils = window.utils;
+window.app.data = (function () {
+  var photoData = [];
+  photoData = generateData();
 
-  var photosData = generatePhotosData();
-  var photosLayout = generatePhotosLayout(photosData);
-  document.querySelector('.pictures').appendChild(photosLayout);
+  function generateData() {
+    var QUANTITY = 25;
 
-  function generatePhotosLayout(currentPhotosData) {
-    var photoTemplate = document.querySelector('#picture').content.querySelector('.picture__link');
-    var photos = document.createDocumentFragment();
-
-    currentPhotosData.forEach(function (photoData, index) {
-      var photo = photoTemplate.cloneNode(true);
-      photo.dataset.id = index;
-      photo.querySelector('.picture__img').src = photoData.url;
-      photo.querySelector('.picture__stat--comments').textContent = photoData.comments.length;
-      photo.querySelector('.picture__stat--likes').textContent = photoData.likes;
-      photos.appendChild(photo);
-    });
-
-    return photos;
-  }
-
-  function generatePhotosData(number) {
-    number = number || 25;
     var COMMENTS = [
       'Всё отлично!',
       'В целом всё неплохо. Но не всё.',
@@ -43,18 +25,28 @@ window.thumb = (function () {
       'Вот это тачка!'
     ];
 
-    return Array.from({length: number}, function (_currentItem, index) {
+    return Array.from({length: QUANTITY}, function (_currentItem, index) {
       return {
         url: 'photos/' + (index + 1) + '.jpg',
-        likes: utils.generareRandomInteger(200, 15),
-        comments: Array.from({length: utils.generareRandomInteger(2, 1)}, function () {
-          return COMMENTS[utils.generareRandomInteger(COMMENTS.length - 1)];
+        likes: window.app.utils.generareRandomInteger(200, 15),
+        comments: Array.from({length: window.app.utils.generareRandomInteger(2, 1)}, function () {
+          return COMMENTS[window.app.utils.generareRandomInteger(COMMENTS.length - 1)];
         }),
-        description: DESCRIPTIONS[utils.generareRandomInteger(DESCRIPTIONS.length - 1)]
+        description: DESCRIPTIONS[window.app.utils.generareRandomInteger(DESCRIPTIONS.length - 1)]
       };
     });
   }
+
   return {
-    data: photosData
+    get: function (photoId) {
+      return photoId ? photoData[photoId] : photoData;
+      // if (photoId) {
+      //   return photoData[photoId];
+      // }
+      // return photoData;
+    },
+    update: function () {
+      photoData = generateData();
+    }
   };
 })();

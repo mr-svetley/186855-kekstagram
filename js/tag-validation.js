@@ -1,9 +1,6 @@
 'use strict';
 
-window.tagValidation = (function () {
-  var utils = window.utils;
-
-  var hashTagInput = document.querySelector('.text__hashtags');
+window.app.tagValidation = (function () {
   var MAX_TAG_LENGHT = 20;
   var ERROR_TOO_MUCH = 'Не больше пяти хэш-тегов';
   var ERROR_TOO_LONG = 'Хэш-тег не может быть длиннее 20 символов';
@@ -11,16 +8,18 @@ window.tagValidation = (function () {
   var ERROR_NO_TAG = 'Хэш-тег должен начинаться с # и не содержать других #';
   var ERROR_NO_NAME_TAG = 'После # должно быть имя тега';
 
-  hashTagInput.addEventListener('change', function (evt) {
+  var hashTagInput = document.querySelector('.text__hashtags');
+
+  function onHashTagInputChange(evt) {
     validateHashTagInput(evt.target);
-  });
+  }
 
-  hashTagInput.addEventListener('keydown', function (evt) {
-    utils.isEscEvent(evt, evt.stopPropagation);
-  });
+  function onHashTagInputEscPress(evt) {
+    window.app.utils.isEscEvent(evt, evt.stopPropagation);
+  }
 
-  function isContainIncorrectTag(tagArray) {
-    return tagArray.some(function (currentTag) {
+  function isContainIncorrectTag(tags) {
+    return tags.some(function (currentTag) {
       return !(currentTag.startsWith('#')) || (currentTag.indexOf('#', 1) !== -1);
     });
   }
@@ -74,6 +73,15 @@ window.tagValidation = (function () {
         input.setCustomValidity('');
     }
   }
+
+  return {
+    init: function () {
+      hashTagInput.addEventListener('change', onHashTagInputChange);
+      hashTagInput.addEventListener('keydown', onHashTagInputEscPress);
+    },
+    destruct: function () {
+      hashTagInput.removeEventListener('change', onHashTagInputChange);
+      hashTagInput.removeEventListener('keydown', onHashTagInputEscPress);
+    }
+  };
 })();
-
-

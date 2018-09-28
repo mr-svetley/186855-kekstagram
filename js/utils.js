@@ -1,6 +1,6 @@
 'use strict';
-
-window.utils = (function () {
+window.app = {};
+window.app.utils = (function () {
   var ESC_KEYCODE = 27;
 
   return {
