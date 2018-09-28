@@ -13,7 +13,7 @@ window.app.effect = (function () {
   var currentEffectName;
 
   function applyEffect(effectName, value) {
-    editorImage.removeAttribute('class');
+    editorImage.classList.remove('effects__preview--' + currentEffectName);
     editorImage.removeAttribute('style');
     editorImage.classList.add('effects__preview--' + effectName);
     currentEffectName = effectName;
@@ -62,16 +62,21 @@ window.app.effect = (function () {
   }
 
   return {
-    init: function () {
+    setHandlers: function () {
       effectInputContainer.addEventListener('click', onEffectInputClick);
-      applyEffect(DEFAULT_EFFECT_NAME, DEFAULT_EFFECT_VALUE);
-      window.app.slider.init(applyEffect);
+      window.app.slider.setHandlers();
     },
-    destruct: function () {
+    removeHandlers: function () {
       effectInputContainer.removeEventListener('click', onEffectInputClick);
+      window.app.slider.removeHandlers();
     },
-    getCurrentEffect: function () {
+    reset: function () {
+      applyEffect(DEFAULT_EFFECT_NAME, DEFAULT_EFFECT_VALUE);
+      window.app.slider.reset();
+    },
+    getCurrent: function () {
       return currentEffectName;
-    }
+    },
+    applyEffect: applyEffect
   };
 })();

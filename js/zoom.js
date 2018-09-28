@@ -31,13 +31,15 @@ window.app.zoom = (function () {
   }
 
   return {
-    init: function () {
+    setHandlers: function () {
       zoomMin.addEventListener('click', onZoomMinClick);
       zoomPlus.addEventListener('click', onZoomPlusClick);
+    },
+    reset: function () {
       zoomInput.value = ZOOM_DEFAULT + '%';
       editorImage.style.transform = 'scale(' + (ZOOM_DEFAULT / 100) + ')';
     },
-    destruct: function () {
+    removeHandlers: function () {
       zoomMin.removeEventListener('click', onZoomMinClick);
       zoomPlus.removeEventListener('click', onZoomPlusClick);
     }
