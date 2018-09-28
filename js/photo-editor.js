@@ -8,9 +8,15 @@ window.app.photoEditor = (function () {
   function openPhotoEditor() {
     photoEditorCancel.addEventListener('click', onPhotoEditorCancelClick);
     document.addEventListener('keydown', onPhotoEditorEscPress);
-    window.app.zoom.init();
-    window.app.effect.init();
-    window.app.tagValidation.init();
+
+    window.app.zoom.setHandlers();
+    window.app.zoom.reset();
+
+    window.app.effect.setHandlers();
+    window.app.effect.reset();
+
+    window.app.tagValidation.setHandlers();
+
     photoEditor.classList.remove('hidden');
   }
 
@@ -26,10 +32,13 @@ window.app.photoEditor = (function () {
     photoEditor.classList.add('hidden');
     photoEditorCancel.removeEventListener('click', onPhotoEditorCancelClick);
     document.removeEventListener('keydown', onPhotoEditorEscPress);
-    window.app.zoom.destruct();
-    window.app.effect.destruct();
-    window.app.tagValidation.destruct();
+
+    window.app.zoom.removeHandlers();
+    window.app.effect.removeHandlers();
+    window.app.tagValidation.removeHandlers();
+
     photoEditorForm.reset();
+
     resetPhotoEditor();
   }
 
@@ -41,3 +50,4 @@ window.app.photoEditor = (function () {
     open: openPhotoEditor
   };
 })();
+

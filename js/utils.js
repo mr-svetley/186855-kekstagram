@@ -15,3 +15,4 @@ window.app.utils = (function () {
     }
   };
 })();
+

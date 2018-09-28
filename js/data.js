@@ -40,10 +40,6 @@ window.app.data = (function () {
   return {
     get: function (photoId) {
       return photoId ? photoData[photoId] : photoData;
-      // if (photoId) {
-      //   return photoData[photoId];
-      // }
-      // return photoData;
     },
     update: function () {
       photoData = generateData();

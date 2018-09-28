@@ -1,6 +1,9 @@
 'use strict';
 
 window.app.photoViewer = (function () {
+  var AVATAR_WIDTH = 35;
+  var AVATAR_HEIGHT = 35;
+
   var photoViewer = document.querySelector('.big-picture');
   var photoViewerCancel = photoViewer.querySelector('.big-picture__cancel');
   var photoViewerImg = photoViewer.querySelector('.big-picture__img img');
@@ -38,7 +41,7 @@ window.app.photoViewer = (function () {
         var commentLayout = document.createElement('li');
         commentLayout.classList.add('social__comment', 'social__comment--text');
 
-        var commentImg = new Image(35, 35);
+        var commentImg = new Image(AVATAR_WIDTH, AVATAR_HEIGHT);
         commentImg.src = 'img/avatar-' + window.app.utils.generareRandomInteger(6, 1) + '.svg';
         commentImg.classList.add('social__picture');
         commentImg.alt = 'Аватар комментатора фотографии';

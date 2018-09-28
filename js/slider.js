@@ -12,9 +12,7 @@ window.app.slider = (function () {
   var slederScale = slider.querySelector('.effect-level__line');
   var sliderDepth = slider.querySelector('.effect-level__depth');
 
-  var currentCb;
-
-  sliderPin.addEventListener('mousedown', function (downEvt) {
+  function onSliderPinMouseDown(downEvt) {
     var scaleLineRect = slederScale.getBoundingClientRect();
     var scaleLineX1 = scaleLineRect.left;
     var scaleLineX2 = scaleLineRect.right;
@@ -40,7 +38,7 @@ window.app.slider = (function () {
       }
 
       applyValue(value);
-      currentCb(window.app.effect.getCurrentEffect(), value);
+      window.app.effect.applyEffect(window.app.effect.getCurrent(), value);
     }
 
     function onMouseUp(upEvt) {
@@ -52,7 +50,7 @@ window.app.slider = (function () {
 
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
-  });
+  }
 
   function applyValue(value) {
     value = Math.round(value);
@@ -62,16 +60,23 @@ window.app.slider = (function () {
   }
 
   return {
-    init: function (cb) {
-      currentCb = cb;
-      applyValue(VALUE_DEFAULT);
+    setHandlers: function () {
+      sliderPin.addEventListener('mousedown', onSliderPinMouseDown);
+    },
+    removeHandlers: function () {
+      sliderPin.removeEventListener('mousedown', onSliderPinMouseDown);
     },
     reset: function () {
       applyValue(VALUE_DEFAULT);
-      currentCb(window.app.effect.getCurrentEffect(), VALUE_DEFAULT);
+      window.app.effect.applyEffect(window.app.effect.getCurrent(), VALUE_DEFAULT);
     },
     hide: function (flag) {
       slider.classList.toggle('hidden', flag);
+      if (flag) {
+        window.app.slider.removeHandlers();
+      } else {
+        window.app.slider.setHandlers();
+      }
     }
   };
 })();

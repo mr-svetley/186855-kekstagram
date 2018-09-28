@@ -75,13 +75,14 @@ window.app.tagValidation = (function () {
   }
 
   return {
-    init: function () {
+    setHandlers: function () {
       hashTagInput.addEventListener('change', onHashTagInputChange);
       hashTagInput.addEventListener('keydown', onHashTagInputEscPress);
     },
-    destruct: function () {
+    removeHandlers: function () {
       hashTagInput.removeEventListener('change', onHashTagInputChange);
       hashTagInput.removeEventListener('keydown', onHashTagInputEscPress);
     }
   };
 })();
+

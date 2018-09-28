@@ -20,7 +20,7 @@ window.app.photoUploader = (function () {
     // } else {
     //   preview.src = '';
     // }
-
+    photoUploadField.blur();
     window.app.photoEditor.open();
   }
 })();
