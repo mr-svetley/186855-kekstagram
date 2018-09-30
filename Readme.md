@@ -2,7 +2,7 @@
 
 * Студент: [Владислав Есин](https://up.htmlacademy.ru/javascript/15/user/186855).
 * Наставник: [Саша Ивашкин](https://up.htmlacademy.ru/javascript/15/user/7280).
-Правка
+
 ---
 
 _Не удаляйте и не обращайте внимание на файлы:_<br>
