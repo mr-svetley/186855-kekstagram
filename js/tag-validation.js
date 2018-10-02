@@ -1,6 +1,6 @@
 'use strict';
 
-window.app.tagValidation = (function () {
+window.tagValidation = (function () {
   var MAX_TAG_LENGHT = 20;
   var ERROR_TOO_MUCH = 'Не больше пяти хэш-тегов';
   var ERROR_TOO_LONG = 'Хэш-тег не может быть длиннее 20 символов';
@@ -15,7 +15,7 @@ window.app.tagValidation = (function () {
   }
 
   function onHashTagInputEscPress(evt) {
-    window.app.utils.isEscEvent(evt, evt.stopPropagation);
+    window.utils.isEscEvent(evt, evt.stopPropagation);
   }
 
   function isContainIncorrectTag(tags) {

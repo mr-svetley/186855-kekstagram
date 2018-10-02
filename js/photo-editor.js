@@ -1,6 +1,6 @@
 'use strict';
 
-window.app.photoEditor = (function () {
+window.photoEditor = (function () {
   var photoEditorForm = document.querySelector('.img-upload__form');
   var photoEditor = photoEditorForm.querySelector('.img-upload__overlay');
   var photoEditorCancel = photoEditor.querySelector('.img-upload__cancel');
@@ -9,13 +9,13 @@ window.app.photoEditor = (function () {
     photoEditorCancel.addEventListener('click', onPhotoEditorCancelClick);
     document.addEventListener('keydown', onPhotoEditorEscPress);
 
-    window.app.zoom.setHandlers();
-    window.app.zoom.reset();
+    window.zoom.setHandlers();
+    window.zoom.reset();
 
-    window.app.effect.setHandlers();
-    window.app.effect.reset();
+    window.effect.setHandlers();
+    window.effect.reset();
 
-    window.app.tagValidation.setHandlers();
+    window.tagValidation.setHandlers();
 
     photoEditor.classList.remove('hidden');
   }
@@ -25,7 +25,7 @@ window.app.photoEditor = (function () {
   }
 
   function onPhotoEditorEscPress(evt) {
-    window.app.utils.isEscEvent(evt, closePhotoEditor);
+    window.utils.isEscEvent(evt, closePhotoEditor);
   }
 
   function closePhotoEditor() {
@@ -33,9 +33,9 @@ window.app.photoEditor = (function () {
     photoEditorCancel.removeEventListener('click', onPhotoEditorCancelClick);
     document.removeEventListener('keydown', onPhotoEditorEscPress);
 
-    window.app.zoom.removeHandlers();
-    window.app.effect.removeHandlers();
-    window.app.tagValidation.removeHandlers();
+    window.zoom.removeHandlers();
+    window.effect.removeHandlers();
+    window.tagValidation.removeHandlers();
 
     photoEditorForm.reset();
 
@@ -47,7 +47,8 @@ window.app.photoEditor = (function () {
   }
 
   return {
-    open: openPhotoEditor
+    open: openPhotoEditor,
+    close: closePhotoEditor
   };
 })();
 

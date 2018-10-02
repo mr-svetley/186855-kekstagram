@@ -1,6 +1,6 @@
 'use strict';
 
-window.app.effect = (function () {
+window.effect = (function () {
   var MAX_BLUR_VALUE = 3;
   var MAX_BRIGHTNESS_VALUE = 3;
   var DEFAULT_EFFECT_VALUE = 100;
@@ -18,9 +18,9 @@ window.app.effect = (function () {
     editorImage.classList.add('effects__preview--' + effectName);
     currentEffectName = effectName;
     if (effectName === 'none') {
-      window.app.slider.hide(true);
+      window.slider.hide(true);
     } else {
-      window.app.slider.hide(false);
+      window.slider.hide(false);
     }
 
     if (value || value === 0) {
@@ -57,22 +57,22 @@ window.app.effect = (function () {
     if (target) {
       var effectName = target.value;
       applyEffect(effectName);
-      window.app.slider.reset();
+      window.slider.reset();
     }
   }
 
   return {
     setHandlers: function () {
       effectInputContainer.addEventListener('click', onEffectInputClick);
-      window.app.slider.setHandlers();
+      window.slider.setHandlers();
     },
     removeHandlers: function () {
       effectInputContainer.removeEventListener('click', onEffectInputClick);
-      window.app.slider.removeHandlers();
+      window.slider.removeHandlers();
     },
     reset: function () {
       applyEffect(DEFAULT_EFFECT_NAME, DEFAULT_EFFECT_VALUE);
-      window.app.slider.reset();
+      window.slider.reset();
     },
     getCurrent: function () {
       return currentEffectName;

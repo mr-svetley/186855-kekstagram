@@ -1,16 +1,18 @@
 'use strict';
 
-window.app.photoThumbs = (function () {
+window.photoThumbs = (function () {
   var photoThumbsContainer = document.querySelector('.pictures');
   var photoThumbTemplate = document.querySelector('#picture').content.querySelector('.picture');
-  renderPhotoThumbs(window.app.data.get());
+  window.backend.load(renderPhotoThumbs, function (error) {
+    throw error;
+  });
 
   photoThumbsContainer.addEventListener('click', function (evt) {
     var target = evt.target.closest('.picture');
     if (target) {
       evt.preventDefault();
       var photoId = target.dataset.id;
-      window.app.photoViewer.open(photoId);
+      window.photoViewer.open(photoId);
     }
   });
 
@@ -37,9 +39,9 @@ window.app.photoThumbs = (function () {
   }
 
   function updatePhotoThumbs() {
-    window.app.data.update();
+    window.backend.update();
     removePhotoThumbs();
-    renderPhotoThumbs(window.app.data.get());
+    renderPhotoThumbs(window.backend.getData());
   }
 
   return {
