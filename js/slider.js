@@ -1,6 +1,6 @@
 'use strict';
 
-window.app.slider = (function () {
+window.slider = (function () {
   var VALUE_MIN = 0;
   var VALUE_MAX = 100;
   var VALUE_DEFAULT = 100;
@@ -38,7 +38,7 @@ window.app.slider = (function () {
       }
 
       applyValue(value);
-      window.app.effect.applyEffect(window.app.effect.getCurrent(), value);
+      window.effect.applyEffect(window.effect.getCurrent(), value);
     }
 
     function onMouseUp(upEvt) {
@@ -68,14 +68,14 @@ window.app.slider = (function () {
     },
     reset: function () {
       applyValue(VALUE_DEFAULT);
-      window.app.effect.applyEffect(window.app.effect.getCurrent(), VALUE_DEFAULT);
+      window.effect.applyEffect(window.effect.getCurrent(), VALUE_DEFAULT);
     },
     hide: function (flag) {
       slider.classList.toggle('hidden', flag);
       if (flag) {
-        window.app.slider.removeHandlers();
+        window.slider.removeHandlers();
       } else {
-        window.app.slider.setHandlers();
+        window.slider.setHandlers();
       }
     }
   };

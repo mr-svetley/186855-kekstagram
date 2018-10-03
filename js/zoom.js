@@ -1,6 +1,6 @@
 'use strict';
 
-window.app.zoom = (function () {
+window.zoom = (function () {
   var ZOOM_MIN = 25;
   var ZOOM_MAX = 100;
   var ZOOM_STEP = 25;
