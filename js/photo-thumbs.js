@@ -3,9 +3,14 @@
 window.photoThumbs = (function () {
   var photoThumbsContainer = document.querySelector('.pictures');
   var photoThumbTemplate = document.querySelector('#picture').content.querySelector('.picture');
-  window.backend.load(renderPhotoThumbs, function (error) {
+  window.backend.load(initPhotoThumbs, function (error) {
     throw error;
   });
+
+  function initPhotoThumbs(data) {
+    window.thumbsSort.init();
+    renderPhotoThumbs(data);
+  }
 
   photoThumbsContainer.addEventListener('click', function (evt) {
     var target = evt.target.closest('.picture');
@@ -17,6 +22,12 @@ window.photoThumbs = (function () {
   });
 
   function renderPhotoThumbs(data) {
+    var thumbs = photoThumbsContainer.querySelectorAll('.picture');
+    if (thumbs.length) {
+      thumbs.forEach(function (currentThumbs) {
+        currentThumbs.remove();
+      });
+    }
     var photosLayout = document.createDocumentFragment();
 
     data.forEach(function (photoData, index) {
@@ -31,20 +42,7 @@ window.photoThumbs = (function () {
     photoThumbsContainer.appendChild(photosLayout);
   }
 
-  function removePhotoThumbs() {
-    var thumbs = photoThumbsContainer.querySelectorAll('.picture');
-    thumbs.forEach(function (currentThumbs) {
-      currentThumbs.remove();
-    });
-  }
-
-  function updatePhotoThumbs() {
-    window.backend.update();
-    removePhotoThumbs();
-    renderPhotoThumbs(window.backend.getData());
-  }
-
   return {
-    update: updatePhotoThumbs
+    render: renderPhotoThumbs
   };
 })();

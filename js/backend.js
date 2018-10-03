@@ -3,6 +3,12 @@
 window.backend = (function () {
   var URL_UPLOAD = 'https://js.dump.academy/kekstagram';
   var URL_LOAD = 'https://js.dump.academy/kekstagram/data';
+  var Error = {
+    NOT_FOUND: 404,
+    OK: 200,
+    BAD_REQUEST: 400,
+    UNAUTHORIZED: 401
+  };
   var photoData = [];
 
   function upload(data, onLoad, onError) {
@@ -30,18 +36,18 @@ window.backend = (function () {
     xhr.addEventListener('load', function () {
       var error;
       switch (xhr.status) {
-        case 200:
+        case Error.OK:
           photoData = xhr.response;
           onLoad(xhr.response);
           break;
 
-        case 400:
+        case Error.BAD_REQUEST:
           error = 'Неверный запрос';
           break;
-        case 401:
+        case Error.UNAUTHORIZED:
           error = 'Пользователь не авторизован';
           break;
-        case 404:
+        case Error.NOT_FOUND:
           error = 'Ничего не найдено';
           break;
 
