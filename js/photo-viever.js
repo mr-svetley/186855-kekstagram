@@ -42,7 +42,7 @@ window.photoViewer = (function () {
         commentLayout.classList.add('social__comment', 'social__comment--text');
 
         var commentImg = new Image(AVATAR_WIDTH, AVATAR_HEIGHT);
-        commentImg.src = 'img/avatar-' + window.utils.generareRandomInteger(6, 1) + '.svg';
+        commentImg.src = 'img/avatar-' + window.utils.generateRandomInteger(6, 1) + '.svg';
         commentImg.classList.add('social__picture');
         commentImg.alt = 'Аватар комментатора фотографии';
 
