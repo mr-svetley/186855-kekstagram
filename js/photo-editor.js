@@ -25,7 +25,9 @@ window.photoEditor = (function () {
   }
 
   function onPhotoEditorEscPress(evt) {
-    window.utils.isEscEvent(evt, closePhotoEditor);
+    if (window.photoUploader.modalStatus() === 'closed') {
+      window.utils.isEscEvent(evt, closePhotoEditor);
+    }
   }
 
   function closePhotoEditor() {
