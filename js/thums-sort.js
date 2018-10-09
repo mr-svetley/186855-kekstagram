@@ -14,7 +14,7 @@ window.thumbsSort = (function () {
   var sortedDataByDiscussed;
 
   function onBtnPopClick() {
-    btnActiveToggler(btnPop);
+    swichBtnActivity(btnPop);
     if (!sortedDataByPop) {
       sortedDataByPop = window.backend.getData();
     }
@@ -22,7 +22,7 @@ window.thumbsSort = (function () {
   }
 
   function onBtnNewClick() {
-    btnActiveToggler(btnNew);
+    swichBtnActivity(btnNew);
     if (!sortedDataByNew) {
       sortedDataByNew = window.utils.generateArrayWithRandonUniqueInteger(NUMBER_OF_NEW_THUMBS, window.backend.getData().length)
         .map(function (id) {
@@ -33,7 +33,7 @@ window.thumbsSort = (function () {
   }
 
   function onBtnDiscussedClick() {
-    btnActiveToggler(btnDiscussed);
+    swichBtnActivity(btnDiscussed);
     if (!sortedDataByDiscussed) {
       sortedDataByDiscussed = window.backend.getData().slice(0);
       sortedDataByDiscussed.sort(function (left, right) {
@@ -53,7 +53,7 @@ window.thumbsSort = (function () {
     window.photoThumbs.render(sortedDataByDiscussed);
   }
 
-  function btnActiveToggler(clickedBtn) {
+  function swichBtnActivity(clickedBtn) {
     btnActive.classList.remove('img-filters__button--active');
     btnActive = clickedBtn;
     btnActive.classList.add('img-filters__button--active');

@@ -4,10 +4,8 @@ window.utils = (function () {
   var ESC_KEYCODE = 27;
 
   function isEscEvent(evt, cb) {
-    if (evt.keyCode === ESC_KEYCODE & cb === true)  {
-      evt.stopPropagation();
-    } else if (evt.keyCode === ESC_KEYCODE) {
-      cb();
+    if (evt.keyCode === ESC_KEYCODE) {
+      cb(evt);
     }
   }
 
@@ -20,10 +18,7 @@ window.utils = (function () {
     var uniqueIds = [];
     var randonId;
     var duplicate;
-
-    if (!min) {
-      min = 0;
-    }
+    min = min || 0;
 
     while (uniqueIds.length !== lenght) {
       randonId = window.utils.generateRandomInteger(min, max);

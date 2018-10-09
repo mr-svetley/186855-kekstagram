@@ -20,11 +20,15 @@ window.tagValidation = (function () {
   }
 
   function onHashTagInputEscPress(evt) {
-    window.utils.isEscEvent(evt, true);
+    window.utils.isEscEvent(evt, function (event) {
+      event.stopPropagetion();
+    });
   }
 
-  function onDescriptionInputWscPress(evt) {
-    window.utils.isEscEvent(evt, true);
+  function onDescriptionInputEscPress(evt) {
+    window.utils.isEscEvent(evt, function (event) {
+      event.stopPropagetion();
+    });
   }
 
   function isContainIncorrectTag(tags) {
@@ -88,13 +92,13 @@ window.tagValidation = (function () {
   function setHandlers() {
     hashTagInput.addEventListener('keyup', onHashTagInputChange);
     hashTagInput.addEventListener('keydown', onHashTagInputEscPress);
-    descriptionInput.addEventListener('keydown', onDescriptionInputWscPress);
+    descriptionInput.addEventListener('keydown', onDescriptionInputEscPress);
   }
 
   function removeHandlers() {
     hashTagInput.removeEventListener('keyup', onHashTagInputChange);
     hashTagInput.removeEventListener('keydown', onHashTagInputEscPress);
-    descriptionInput.removeEventListener('keydown', onDescriptionInputWscPress);
+    descriptionInput.removeEventListener('keydown', onDescriptionInputEscPress);
   }
 
   return {
