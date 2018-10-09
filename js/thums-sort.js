@@ -44,12 +44,15 @@ window.thumbsSort = (function () {
   }
 
   function renderDataByPop() {
+    window.photoThumbs.remove();
     window.photoThumbs.render(sortedDataByPop);
   }
   function renderDataByNew() {
+    window.photoThumbs.remove();
     window.photoThumbs.render(sortedDataByNew);
   }
   function renderDataByDiscussed() {
+    window.photoThumbs.remove();
     window.photoThumbs.render(sortedDataByDiscussed);
   }
 

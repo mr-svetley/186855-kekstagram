@@ -21,13 +21,13 @@ window.tagValidation = (function () {
 
   function onHashTagInputEscPress(evt) {
     window.utils.isEscEvent(evt, function (event) {
-      event.stopPropagetion();
+      event.stopPropagation();
     });
   }
 
   function onDescriptionInputEscPress(evt) {
     window.utils.isEscEvent(evt, function (event) {
-      event.stopPropagetion();
+      event.stopPropagation();
     });
   }
 
