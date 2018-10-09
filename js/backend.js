@@ -11,11 +11,34 @@ window.backend = (function () {
   };
   var photoData = [];
 
-  function upload(data, onLoad, onError) {
+  function createXHR(method, url, onLoad, onError, data) {
+    data = data || null;
     var xhr = new XMLHttpRequest();
-
     xhr.responseType = 'json';
     xhr.addEventListener('load', function () {
+      var error;
+      switch (xhr.status) {
+        case Error.OK:
+          photoData = xhr.response;
+          onLoad(xhr.response);
+          break;
+        case Error.BAD_REQUEST:
+          error = 'Неверный запрос. (' + xhr.status + '/' + xhr.statusText + ')';
+          break;
+        case Error.UNAUTHORIZED:
+          error = 'Пользователь не авторизован. (' + xhr.status + '/' + xhr.statusText + ')';
+          break;
+        case Error.NOT_FOUND:
+          error = 'Ничего не найдено. (' + xhr.status + '/' + xhr.statusText + ')';
+          break;
+
+        default:
+          error = 'Cтатус ответа: : ' + xhr.status + '/' + xhr.statusText;
+      }
+
+      if (error) {
+        onError(error);
+      }
       onLoad(xhr.response);
     });
     xhr.addEventListener('error', function () {
@@ -25,54 +48,24 @@ window.backend = (function () {
     xhr.addEventListener('timeout', function () {
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
-    xhr.open('POST', URL_UPLOAD);
+    xhr.open(method, url);
     xhr.send(data);
   }
 
+  function upload(data, onLoad, onError) {
+    createXHR('POST', URL_UPLOAD, onLoad, onError, data);
+  }
+
   function load(onLoad, onError) {
-    var xhr = new XMLHttpRequest();
-    xhr.responseType = 'json';
-    xhr.open('GET', URL_LOAD);
-    xhr.addEventListener('load', function () {
-      var error;
-      switch (xhr.status) {
-        case Error.OK:
-          photoData = xhr.response;
-          onLoad(xhr.response);
-          break;
+    createXHR('GET', URL_LOAD, onLoad, onError);
+  }
 
-        case Error.BAD_REQUEST:
-          error = 'Неверный запрос';
-          break;
-        case Error.UNAUTHORIZED:
-          error = 'Пользователь не авторизован';
-          break;
-        case Error.NOT_FOUND:
-          error = 'Ничего не найдено';
-          break;
-
-        default:
-          error = 'Cтатус ответа: : ' + xhr.status + ' ' + xhr.statusText;
-      }
-
-      if (error) {
-        onError(error);
-      }
-    });
-    xhr.addEventListener('error', function () {
-      onError('Произошла ошибка соединения');
-    });
-
-    xhr.addEventListener('timeout', function () {
-      onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
-    });
-    xhr.send();
+  function getData(photoId) {
+    return photoId ? photoData[photoId] : photoData;
   }
 
   return {
-    getData: function (photoId) {
-      return photoId ? photoData[photoId] : photoData;
-    },
+    getData: getData,
     upload: upload,
     load: load
   };

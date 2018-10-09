@@ -59,24 +59,32 @@ window.slider = (function () {
     sliderInput.value = value;
   }
 
-  return {
-    setHandlers: function () {
-      sliderPin.addEventListener('mousedown', onSliderPinMouseDown);
-    },
-    removeHandlers: function () {
-      sliderPin.removeEventListener('mousedown', onSliderPinMouseDown);
-    },
-    reset: function () {
-      applyValue(VALUE_DEFAULT);
-      window.effect.applyEffect(window.effect.getCurrent(), VALUE_DEFAULT);
-    },
-    hide: function (flag) {
-      slider.classList.toggle('hidden', flag);
-      if (flag) {
-        window.slider.removeHandlers();
-      } else {
-        window.slider.setHandlers();
-      }
+  function setHandlers() {
+    sliderPin.addEventListener('mousedown', onSliderPinMouseDown);
+  }
+
+  function removeHandlers() {
+    sliderPin.removeEventListener('mousedown', onSliderPinMouseDown);
+  }
+
+  function reset() {
+    applyValue(VALUE_DEFAULT);
+    window.effect.applyEffect(window.effect.getCurrent(), VALUE_DEFAULT);
+  }
+
+  function hide(flag) {
+    slider.classList.toggle('hidden', flag);
+    if (flag) {
+      window.slider.removeHandlers();
+    } else {
+      window.slider.setHandlers();
     }
+  }
+
+  return {
+    setHandlers: setHandlers,
+    removeHandlers: removeHandlers,
+    reset: reset,
+    hide: hide
   };
 })();

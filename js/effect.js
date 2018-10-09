@@ -61,22 +61,30 @@ window.effect = (function () {
     }
   }
 
+  function setHandlers() {
+    effectInputContainer.addEventListener('click', onEffectInputClick);
+    window.slider.setHandlers();
+  }
+
+  function removeHandlers() {
+    effectInputContainer.removeEventListener('click', onEffectInputClick);
+    window.slider.removeHandlers();
+  }
+
+  function reset() {
+    applyEffect(DEFAULT_EFFECT_NAME, DEFAULT_EFFECT_VALUE);
+    window.slider.reset();
+  }
+
+  function getCurrent() {
+    return currentEffectName;
+  }
+
   return {
-    setHandlers: function () {
-      effectInputContainer.addEventListener('click', onEffectInputClick);
-      window.slider.setHandlers();
-    },
-    removeHandlers: function () {
-      effectInputContainer.removeEventListener('click', onEffectInputClick);
-      window.slider.removeHandlers();
-    },
-    reset: function () {
-      applyEffect(DEFAULT_EFFECT_NAME, DEFAULT_EFFECT_VALUE);
-      window.slider.reset();
-    },
-    getCurrent: function () {
-      return currentEffectName;
-    },
+    setHandlers: setHandlers,
+    removeHandlers: removeHandlers,
+    reset: reset,
+    getCurrent: getCurrent,
     applyEffect: applyEffect
   };
 })();

@@ -30,18 +30,24 @@ window.zoom = (function () {
     zoomPhoto(ZOOM_STEP);
   }
 
+  function setHandlers() {
+    zoomMin.addEventListener('click', onZoomMinClick);
+    zoomPlus.addEventListener('click', onZoomPlusClick);
+  }
+
+  function reset() {
+    zoomInput.value = ZOOM_DEFAULT + '%';
+    editorImage.style.transform = 'scale(' + (ZOOM_DEFAULT / 100) + ')';
+  }
+
+  function removeHandlers() {
+    zoomMin.removeEventListener('click', onZoomMinClick);
+    zoomPlus.removeEventListener('click', onZoomPlusClick);
+  }
+
   return {
-    setHandlers: function () {
-      zoomMin.addEventListener('click', onZoomMinClick);
-      zoomPlus.addEventListener('click', onZoomPlusClick);
-    },
-    reset: function () {
-      zoomInput.value = ZOOM_DEFAULT + '%';
-      editorImage.style.transform = 'scale(' + (ZOOM_DEFAULT / 100) + ')';
-    },
-    removeHandlers: function () {
-      zoomMin.removeEventListener('click', onZoomMinClick);
-      zoomPlus.removeEventListener('click', onZoomPlusClick);
-    }
+    setHandlers: setHandlers,
+    reset: reset,
+    removeHandlers: removeHandlers
   };
 })();
