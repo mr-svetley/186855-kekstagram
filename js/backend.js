@@ -20,7 +20,6 @@ window.backend = (function () {
       switch (xhr.status) {
         case Error.OK:
           photoData = xhr.response;
-          onLoad(xhr.response);
           break;
         case Error.BAD_REQUEST:
           error = 'Неверный запрос. (' + xhr.status + '/' + xhr.statusText + ')';
