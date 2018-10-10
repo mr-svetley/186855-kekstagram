@@ -2,6 +2,7 @@
 
 window.utils = (function () {
   var ESC_KEYCODE = 27;
+  var lastTimeout;
 
   function isEscEvent(evt, cb) {
     if (evt.keyCode === ESC_KEYCODE) {
@@ -34,7 +35,6 @@ window.utils = (function () {
   }
 
   function setNoDebounce(interval, cb) {
-    var lastTimeout;
     if (lastTimeout) {
       window.clearTimeout(lastTimeout);
     }
