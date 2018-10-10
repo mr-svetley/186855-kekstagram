@@ -61,7 +61,6 @@ window.tagValidation = (function () {
     var tags = input.value
       .split(' ')
       .filter(Boolean);
-    input.value = tags.join(' ');
     tags = tags.map(function (current) {
       return current.toLowerCase();
     });
