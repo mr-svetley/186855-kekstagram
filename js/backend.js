@@ -19,7 +19,9 @@ window.backend = (function () {
       var error;
       switch (xhr.status) {
         case Error.OK:
-          photoData = xhr.response;
+          if (method === 'GET') {
+            photoData = xhr.response;
+          }
           break;
         case Error.BAD_REQUEST:
           error = 'Неверный запрос. (' + xhr.status + '/' + xhr.statusText + ')';
