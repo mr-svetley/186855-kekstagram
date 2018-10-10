@@ -19,6 +19,7 @@ window.photoThumbs = (function () {
     if (target) {
       evt.preventDefault();
       var photoId = target.dataset.id;
+      photoId = parseInt(photoId, 10);
       window.photoViewer.open(photoId);
     }
   });
@@ -33,9 +34,9 @@ window.photoThumbs = (function () {
   function renderPhotoThumbs(data) {
     var photosLayout = document.createDocumentFragment();
 
-    data.forEach(function (photoData, index) {
+    data.forEach(function (photoData) {
       var thumbTemplate = photoThumbTemplate.cloneNode(true);
-      thumbTemplate.dataset.id = index;
+      thumbTemplate.dataset.id = photoData.id;
       thumbTemplate.querySelector('.picture__img').src = photoData.url;
       thumbTemplate.querySelector('.picture__comments').textContent = photoData.comments.length;
       thumbTemplate.querySelector('.picture__likes').textContent = photoData.likes;

@@ -19,7 +19,12 @@ window.backend = (function () {
       var error;
       switch (xhr.status) {
         case Error.OK:
-          photoData = xhr.response;
+          if (method === 'GET') {
+            photoData = xhr.response;
+            photoData.forEach(function (item, index) {
+              item.id = index;
+            });
+          }
           break;
         case Error.BAD_REQUEST:
           error = 'Неверный запрос. (' + xhr.status + '/' + xhr.statusText + ')';
@@ -38,7 +43,11 @@ window.backend = (function () {
       if (error) {
         onError(error);
       }
-      onLoad(xhr.response);
+      if (method === 'GET') {
+        onLoad(photoData);
+      } else {
+        onLoad(xhr.response);
+      }
     });
     xhr.addEventListener('error', function () {
       onError('Произошла ошибка соединения');
@@ -60,7 +69,14 @@ window.backend = (function () {
   }
 
   function getData(photoId) {
-    return photoId ? photoData[photoId] : photoData;
+    if (photoId || photoId === 0) {
+      var photoDataById = photoData.find(function (item) {
+        return item.id === photoId;
+      });
+      return photoDataById;
+    } else {
+      return photoData;
+    }
   }
 
   return {
